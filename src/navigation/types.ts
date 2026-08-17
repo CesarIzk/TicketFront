@@ -11,4 +11,5 @@ export type RootStackParamList = {
     Checkout: { orderId: string; eventId: string };
     TicketsResult: { tickets: IssuedTicket[]; eventTitle: string };
     Profile: undefined;
+    AdminDashboard: undefined;
 };

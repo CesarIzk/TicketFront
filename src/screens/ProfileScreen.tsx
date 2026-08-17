@@ -1,9 +1,15 @@
 import React from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "../context/AuthContext";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { RootStackParamList } from "../navigation/types";
+
+type ProfileScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export default function ProfileScreen() {
     const { user, logout } = useAuth();
+    const navigation = useNavigation<ProfileScreenNavigationProp>();
 
     return (
         <View style={styles.container}>
@@ -15,6 +21,15 @@ export default function ProfileScreen() {
             <View style={styles.roleBadge}>
                 <Text style={styles.roleBadgeText}>{user?.role}</Text>
             </View>
+
+            {user?.role === "ADMIN" && (
+                <Pressable
+                    style={styles.adminButton}
+                    onPress={() => navigation.navigate("AdminDashboard")}
+                >
+                    <Text style={styles.adminButtonText}>📊 Ir al Dashboard</Text>
+                </Pressable>
+            )}
 
             <Pressable style={styles.logoutButton} onPress={logout}>
                 <Text style={styles.logoutButtonText}>Cerrar sesión</Text>
@@ -45,8 +60,16 @@ const styles = StyleSheet.create({
         borderRadius: 999,
     },
     roleBadgeText: { color: "#7c3aed", fontWeight: "700", fontSize: 12 },
+    adminButton: {
+        marginTop: 24,
+        backgroundColor: "#FF9500",
+        borderRadius: 10,
+        paddingVertical: 14,
+        paddingHorizontal: 40,
+    },
+    adminButtonText: { color: "#fff", fontWeight: "700", fontSize: 14 },
     logoutButton: {
-        marginTop: 40,
+        marginTop: 20,
         borderWidth: 1,
         borderColor: "#dc2626",
         borderRadius: 10,

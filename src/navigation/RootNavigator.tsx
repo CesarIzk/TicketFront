@@ -12,6 +12,7 @@ import EventDetailScreen from "../screens/EventDetailScreen";
 import CheckoutScreen from "../screens/CheckoutScreen";
 import TicketsResultScreen from "../screens/TicketsResultScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import AdminDashboardScreen from "../screens/AdminDashboardScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -55,6 +56,11 @@ export default function RootNavigator() {
                             name="Profile"
                             component={ProfileScreen}
                             options={{ title: "Mi perfil" }}
+                        />
+                        <Stack.Screen
+                            name="AdminDashboard"
+                            component={AdminDashboardScreen}
+                            options={{ title: "Dashboard Admin" }}
                         />
                     </>
                 ) : (
